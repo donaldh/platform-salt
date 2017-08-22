@@ -53,7 +53,7 @@ data-service-copy_service:
 {% if grains['os'] == 'Ubuntu' %}
     - name: /etc/init/dataservice.conf
     - source: salt://data-service/templates/data-service.conf.tpl
-{% elif grains['os'] == 'RedHat' %}
+{% elif grains['os'] in ('RedHat', 'CentOS') %}
     - name: /usr/lib/systemd/system/dataservice.service
     - source: salt://data-service/templates/data-service.service.tpl
 {%- endif %}
@@ -61,7 +61,7 @@ data-service-copy_service:
     - defaults:
         install_dir: {{ install_dir }}
 
-{% if grains['os'] == 'RedHat' %}
+{% if grains['os'] in ('RedHat', 'CentOS') %}
 data-service-systemctl_reload:
   cmd.run:
     - name: /bin/systemctl daemon-reload; /bin/systemctl enable dataservice
