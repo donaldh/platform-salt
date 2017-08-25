@@ -7,8 +7,8 @@
 {% set logstash_version = pillar['logstash']['version'] %}
 {% set logstash_package = 'logstash-' + logstash_version + '.tar.gz' %}
 {% set logstash_url = mirror_location + logstash_package %}
-{% set plugin_pack_url = mirror_location + 'logstash-offline-plugins-' + logstash_version + '.zip' %}
-
+{% set plugin_pack_name = 'logstash-offline-plugins-5.2.2.zip' %}
+{% set plugin_pack_url = mirror_location + plugin_pack_name %}
 
 include:
   - java
@@ -43,7 +43,7 @@ logshipper-link_release:
 {% if grains['os'] in ('RedHat', 'CentOS') %}
 logshipper-journald-plugin:
   cmd.run:
-    - name: curl {{ plugin_pack_url }} > {{ install_dir }}/logstash/logstash_plugins.zip; cd {{ install_dir }}/logstash; bin/logstash-plugin install file:///{{ install_dir }}/logstash/logstash_plugins.zip
+    - name: curl {{ plugin_pack_url }} > {{ install_dir }}/logstash/{{ plugin_pack_name }}; cd {{ install_dir }}/logstash; bin/logstash-plugin install file://{{ install_dir }}/logstash/{{ plugin_pack_name }};
 {% endif %}
 
 logshipper-copy_configuration:
