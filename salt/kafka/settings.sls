@@ -25,7 +25,7 @@
   'num_partitions': gc.get('num_partitions', pc.get('num_partitions', 2)),
   'log_retention_bytes': gc.get('log_retention_bytes', pc.get('log_retention_bytes', 16106127360)),
   'host_name': gc.get('host_name', pc.host_name),
-  'advertised_host_name': salt['grains.get']('ip_interfaces:eth0:0', pc.advertised_host_name)
+  'advertised_host_name': salt['grains.get']('ip_interfaces:ens160:0', pc.advertised_host_name)
   } %}
 
 #  'advertised_host_name': gc.get('advertised_host_name', pc.advertised_host_name)
